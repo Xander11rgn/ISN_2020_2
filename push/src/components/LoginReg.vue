@@ -3,7 +3,7 @@
     <b-container>
       <b-row>
         <b-col>
-          <a href="login.html"><b-button variant="outline-success" size="lg">ВОЙТИ</b-button></a>
+          <a href="#"><b-button variant="outline-success" size="lg">ВОЙТИ</b-button></a>
         </b-col>
         <b-col>
           <b-button variant="outline-success" size="lg">РЕГИСТРАЦИЯ</b-button>

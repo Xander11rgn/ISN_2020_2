@@ -25,7 +25,7 @@
 
     <script>
       if ("serviceWorker" in navigator) {
-        window.addEventListener("load", function () {
+        window.addEventListener("load", function() {
           navigator.serviceWorker.register("/sw.js");
         });
       }
@@ -35,8 +35,7 @@
         var notification = new Notification("Taxi4Life", {
           tag: "ache-mail",
           body: textnotification,
-          icon:
-            "../images/icon-72x72.png",
+          icon: "https://sun9-43.userapi.com/icBBtXR9d1NwpYzPlFC0VbihadP1-AazqP9Umg/qIy5PBSJ63c.jpg"
         });
         localStorage.setItem(
           "text",
@@ -51,7 +50,7 @@
         else if (Notification.permission === "granted")
           setInterval(notifyMe, 5000);
         else if (Notification.permission !== "denied") {
-          Notification.requestPermission(function (permission) {
+          Notification.requestPermission(function(permission) {
             if (!("permission" in Notification))
               Notification.permission = permission;
             if (permission === "granted") setInterval(notifyMe, 5000);
@@ -75,7 +74,9 @@
     </script>
     <title>Taxi4Life</title>
   </head>
-  <body>
+  <body
+    onload="setTimeout(notifSet(), getRandomInt(1000,10000)), localStorage.clear();"
+  >
     <noscript>
       <strong
         >We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work
