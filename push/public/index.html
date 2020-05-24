@@ -6,16 +6,71 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
     <link rel="manifest" href="/manifest.json" />
     <link rel="icon" href="<%= BASE_URL %>favicon.ico" />
-    <link rel="stylesheet" href="//unpkg.com/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.css">
-    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700,900&display=swap&subset=cyrillic" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Comfortaa&display=swap" rel="stylesheet">
+    <link
+      rel="stylesheet"
+      href="//unpkg.com/bootstrap/dist/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto:400,700,900&display=swap&subset=cyrillic"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Comfortaa&display=swap"
+      rel="stylesheet"
+    />
 
     <script>
       if ("serviceWorker" in navigator) {
-        window.addEventListener("load", function() {
+        window.addEventListener("load", function () {
           navigator.serviceWorker.register("/sw.js");
         });
+      }
+
+      function notifyMe() {
+        var textnotification = randomstr(getRandomInt(5, 15));
+        var notification = new Notification("Taxi4Life", {
+          tag: "ache-mail",
+          body: textnotification,
+          icon:
+            "../images/icon-72x72.png",
+        });
+        localStorage.setItem(
+          "text",
+          localStorage.getItem("text") + " " + textnotification
+        );
+        console.log(localStorage.getItem("text"));
+      }
+
+      function notifSet() {
+        if (!("Notification" in window))
+          alert("Ваш браузер не поддерживает уведомления.");
+        else if (Notification.permission === "granted")
+          setInterval(notifyMe, 5000);
+        else if (Notification.permission !== "denied") {
+          Notification.requestPermission(function (permission) {
+            if (!("permission" in Notification))
+              Notification.permission = permission;
+            if (permission === "granted") setInterval(notifyMe, 5000);
+          });
+        }
+      }
+
+      function getRandomInt(min, max) {
+        return Math.floor(Math.random() * (max - min)) + min;
+      }
+
+      function randomstr(len) {
+        chrs = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+        var str = "";
+        for (var i = 0; i < len; i++) {
+          var pos = Math.floor(Math.random() * chrs.length);
+          str += chrs.substring(pos, pos + 1);
+        }
+        return str;
       }
     </script>
     <title>Taxi4Life</title>
